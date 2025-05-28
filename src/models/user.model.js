@@ -31,6 +31,4 @@ const userSchema = new mongoose.Schema({
 // Create unique index on email
 userSchema.index({ email: 1 }, { unique: true });
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+export default mongoose.model("User", userSchema);
