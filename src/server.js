@@ -13,9 +13,6 @@ const PORT = process.env.PORT || 4000;
 const DB_URL = `${process.env.DB}`;
 const SERVER = `${process.env.SERVER}`;
 
-
-
-
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());

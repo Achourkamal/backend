@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+import mongoose from "mongoose";
+import validator from "validator";
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -13,11 +13,11 @@ const userSchema = new mongoose.Schema({
       message: 'Please provide a valid email address'
     }
   },
-  password: {
-    type: String,
-    required: [true, 'Password is required'],
-    minlength: [6, 'Password must be at least 6 characters long']
-  },
+  // password: {
+  //   type: String,
+  //   required: [true, 'Password is required'],
+  //   minlength: [6, 'Password must be at least 6 characters long']
+  // },
   name: {
     type: String,
     required: [true, 'Name is required']

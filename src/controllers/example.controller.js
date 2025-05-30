@@ -14,7 +14,7 @@ const createExample = async (req, res) => {
 
         const newExample = new Example(req.body);
         await newExample.save();
-        return res.status(201).json({ payload: newExample });
+        return res.status(201).json(newExample );
     } catch (error) {
         handleError(res, error, "Error in creating example", 500);
     }
@@ -29,7 +29,7 @@ const getOneExample = async (req, res) => {
             return handleError(res, null, "No example found", 404); // 404 Not Found
         }
 
-        return res.status(200).json({ payload: example });
+        return res.status(200).json(example);
     } catch (error) {
         handleError(res, error, "Error in getting one example", 500); // 500 server error
     }
@@ -59,7 +59,7 @@ const updateExample = async (req, res) => {
             return handleError(res, null, "No data found", 404);
         }
 
-        return res.status(200).json({ payload: example });
+        return res.status(200).json(example);
     } catch (error) {
         handleError(res, error, "Error in updating example", 500);
     }
@@ -74,7 +74,7 @@ const deleteExample = async (req, res) => {
             return handleError(res, null, "No example found", 404);
         }
 
-        return res.status(200).json({ payload: "Example deleted" });
+        return res.status(200).json( "Example deleted" );
     } catch (error) {
         handleError(res, error, "Error in deleting example", 500);
     }
