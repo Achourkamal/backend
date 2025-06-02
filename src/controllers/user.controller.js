@@ -4,14 +4,12 @@ import handleError from "../middlewares/errors/handleError.js";
 // Create a new user
 const createUser = async (req, res) => {
     try {
-        const { name, email } = req.body;
-
-        const existing = await User.findOne({ $or: [{ name }, { email }] });
+        const existing = await User.findOne({ $or: [{ name: req.body.name }, { email: req.body.email }] });
         if (existing) {
             return handleError(res, null, "Name or email already exists", 409); // 409 Conflict
         }
 
-        const user = new User({ name, email });
+        const user = new User(req.body);
         await user.save();
 
         return res.status(201).json( user );
@@ -53,7 +51,7 @@ const getUserById = async (req, res) => {
 // Update user
 const updateUser = async (req, res) => {
     try {
-        const { name, email } = req.body;
+        const { name, email, password } = req.body;
 
         const existing = await User.findOne({
             $or: [{ name }, { email }],
@@ -66,7 +64,7 @@ const updateUser = async (req, res) => {
 
         const user = await User.findByIdAndUpdate(
             req.params.id,
-            { name, email },
+            { name, email, password },
             { new: true, runValidators: true }
         );
 
