@@ -6,21 +6,24 @@ import Category from '../models/category.model.js';
 const createProduct = async (req, res) => {
     
     try {
-        const exists = await Product.findOne({ name: req.body.name });
-        if (exists) {
-            return handleError(res, null, "Product already exists", 409);
+        const exist = await Product.findOne({ name: req.body.name });
+        if (exist) {
+            return handleError(res, null, "Product already exist", 409);
         }
-//controler de saisir pour stock et price wala prix ( doit etre possitive)
         const categoryId = req.body.category
         
         const category = await Category.findOne({_id: categoryId});
         if (category === null) {
             return handleError(res, null, "Category dose not exist exists", 409);
         }
+
         if (typeof req.body.price !== 'number' || req.body.price <= 0) {
         return handleError(res, null, "Price must be a positive number", 400);
     }
-    
+
+    if (!Number.isInteger(req.body.stock) || req.body.stock < 0) {
+    return handleError(res, null, "Stock must be a non-negative integer", 400);
+}
         const product = new Product(req.body);
         await product.save();
 
