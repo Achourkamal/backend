@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+import mongoose from "mongoose";
+import validator from "validator";
 
 const productSchema = new mongoose.Schema({
   name: {
@@ -18,6 +18,7 @@ const productSchema = new mongoose.Schema({
   },
   image: {
     type: String,
+    default: "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg", // Valeur par défaut utile
     validate: {
       validator: (value) => !value || validator.isURL(value),
       message: 'Image must be a valid URL'
@@ -35,7 +36,5 @@ const productSchema = new mongoose.Schema({
   }
 });
 
-const Product = mongoose.model('Product', productSchema);
-
-module.exports = Product;
-
+// ✅ Exportation propre
+export default mongoose.model("Product", productSchema);
