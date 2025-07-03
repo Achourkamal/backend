@@ -1,10 +1,9 @@
 import express from 'express';
 import productController from '../controllers/product.controller.js';
-import isAuth from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
 
-router.post('/', isAuth, productController.createProduct);
+router.post('/', productController.createProduct);
 router.get('/', productController.getAllProducts);
 router.get('/:id', productController.getProductById);
 router.put('/:id', productController.updateProduct);

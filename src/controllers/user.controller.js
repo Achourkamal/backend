@@ -51,7 +51,7 @@ const getUserById = async (req, res) => {
 // Update user
 const updateUser = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, isAdmin } = req.body;
 
         const existing = await User.findOne({
             $or: [{ name }, { email }],
@@ -64,7 +64,7 @@ const updateUser = async (req, res) => {
 
         const user = await User.findByIdAndUpdate(
             req.params.id,
-            { name, email, password },
+            { name, email, password, isAdmin },
             { new: true, runValidators: true }
         );
 
